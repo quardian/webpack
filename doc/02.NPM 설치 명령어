@@ -1,0 +1,60 @@
+┌───────────────────────────────────────────────┐
+    NPM 설치 명령어
+└───────────────────────────────────────────────┘
+
+
+1. npm 지역 설치
+
+    - 설치 위치 
+        ./node_modules 하위에 설치됨
+
+    - 설치 옵션
+
+        --save-prod (생략시 기본값)
+            . 배포용 라이브러리 ( npm run build 로 빌드시 최종 어플리케이션 안에 포함됨 )
+            . react, vue, jquery, jquery-ui와 같이 어플리케이션 실행에 필요한 라이브러리 
+            . package.json 파일내, "dependencies":{} 에 추가됨
+            ex npm i --save-prod vue 
+
+        --save-dev  (-D) 
+            . 개발용 라이브러리 ( npm run build 로 빌드시 최종 어플리케이션 안에 포함되지 않음 )
+            . webpack, js-compression, sass 개발 및 트랜스레이션(컴파일)할 때 필요한 라이브러리 
+            . package.json 파일내, "devDependencies":{} 에 추가됨
+            ex) npm i -D vue 
+
+        * save-prod 와 save-dev 옵션 모두 라이브러리 설치경로는 ./node_modules 하위에 동일함
+   
+
+    1) gulp 라이브러리 설치
+    ┌───────────────────────────────────────────────┐
+        npm install --save-prod glup
+        or 
+        npm i --save-prod gulp
+        or 
+        npm i glup 
+    └───────────────────────────────────────────────┘
+
+    2) gulp 라이브러리 삭제
+    ┌───────────────────────────────────────────────┐
+        npm uninstall gulp
+    └───────────────────────────────────────────────┘
+
+
+2. npm 글로벌 설치
+
+    - OS별 npm 전역 설치되는 경로
+        . windows : %USERPROFILE%\AppData\Roaming\npm\node_modules 
+        . mac     : /usr/local/lib/node_modules 
+        . ubuntu  : /usr/local/lib/node_moduels    
+
+    - cli 기반의 명령어를 제공하는 라이브러를 주로 설치함. ( glup, npm, )
+
+
+    1) gulp 글로벌 라이브러리 설치
+    ┌───────────────────────────────────────────────┐
+        npm install --global gulp
+        or
+        npm install -g glup
+        or 
+        npm i -g glup 
+    └───────────────────────────────────────────────┘

@@ -1,0 +1,33 @@
+┌───────────────────────────────────────────────┐
+    웹팩(Webpack) 설정파일
+└───────────────────────────────────────────────┘
+
+    - webpack --mode=none --entry=src/index.js ...
+    - 위와 같이 웹팩 빌드시, 옵션을 지정할 수도 있지만 
+      별도의 웹팩 설정파일(webpack.config.js)로 지정이 가능하다.
+
+
+ 1. /webpack.config.js 파일 추가 
+    ┌───────────────────────────────────────────────┐
+        var path = require('path');
+
+        module.exports = {
+            mode: 'none',
+            entry: './src/index.js',
+            output: {
+                filename: 'main.js',
+                path: path.resolve(__dirname, 'dist')
+            }
+        }
+    └───────────────────────────────────────────────┘
+
+2. pakcage.json 파일내 "scripts" 속성의 build 명령에서 옵션을 제거한다.
+    ┌───────────────────────────────────────────────┐
+        "scripts" : {
+            //"build":"webpack --mode=none"
+            "build":"webpack"
+        }
+    └───────────────────────────────────────────────┘        
+
+
+

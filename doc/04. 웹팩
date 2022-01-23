@@ -1,0 +1,121 @@
+┌───────────────────────────────────────────────┐
+    웹팩(Webpack)
+└───────────────────────────────────────────────┘
+
+1. 웹팩이란
+
+    - 웹팩이란 모듈 번들러(Module Bundler) 이다.
+    - 모듈 번들란 웹 어플리케이션 구성자원(HTML, CSS, Javascript, Images 등)을 모두 각각의 모듈로 보고
+      이를 조합해서 병합된 하나의 결과물을 만드는 도구를 의미.
+
+
+2. 모듈이란?
+    - 웹팩에서 지칭하는 모듈 개념은 Javascript 뿐만 아니라 HTML, CSS, Images, Font 등 많은 파일들이 필요한데
+      이 파일 하나하나가 모두 모듈이다.
+
+
+3. 모듈 번들링이란?
+
+    - 웹 어플리케이션을 구성하는 다수의 자원들을 하나의 파일로 병합 및 압축 해주는 동작을 모듈 번들링 이라고 한다.
+    - 빌드, 번들링, 변환 이 세 단어 모두 같은 의미입니다.
+
+
+
+┌───────────────────────────────────────────────┐
+    웹팩(Webpack) 맛보기
+└───────────────────────────────────────────────┘
+
+1. 빈 디렉토리에 npm 패키지 초기화 
+    ┌───────────────────────────────────────────────┐
+        npm init -y
+    └───────────────────────────────────────────────┘
+
+2. 아래 명령어로, 웹팩 관련 라이브러리와 lodash 라이브러리 설치
+    ┌───────────────────────────────────────────────┐
+        npm i webpack webpack-cli -D 
+        npm i lodash
+    └───────────────────────────────────────────────┘    
+
+3. /index.html 파일 생성
+    ┌───────────────────────────────────────────────┐
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <script src="https://unpkg.com/lodash@4.16.6"></script>
+            <title>Document</title>
+        </head>
+        <body>
+            <script src="src/index.js"></script>
+        </body>
+        </html>
+    └───────────────────────────────────────────────┘  
+
+4. /src/index.js 파일 생성
+    ┌───────────────────────────────────────────────┐
+        function component(){
+            var element = document.createElement('div');
+
+            element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+            return element;
+        }
+
+        document.body.appendChild(component());
+    └───────────────────────────────────────────────┘        
+
+5. Live Server 실행 
+    - index.html 파일을 열고, 우측 마우스 클릭하여 라이브 서버 실행
+
+6. 이제 부터
+
+    1) /src/index.js 파일 수정 
+
+        import _ from 'lodash';
+
+    2) /index.html 
+    ┌───────────────────────────────────────────────┐
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <!--<script src="https://unpkg.com/lodash@4.16.6"></script>-->
+            <title>Document</title>
+        </head>
+        <body>
+            <!--<script src="src/index.js"></script>-->
+            <!--빌드 후 생성되는 파일로 수정 -->
+            <script src="dist/main.js"></script>
+        </body>
+        </html>
+    └───────────────────────────────────────────────┘        
+
+    3) /package.json 파일에 "build" 명령어 추가
+    ┌───────────────────────────────────────────────┐
+        "scripts" : {
+            "build":"webpack --mode=none"
+        }
+    └───────────────────────────────────────────────┘        
+
+    4) 터미날 창에서 아래 명령어 실행 
+    ┌───────────────────────────────────────────────┐
+        npm run build
+    └───────────────────────────────────────────────┘        
+     - 위 명령어 실행시, /dist/main.js 파일이 생성된다.
+
+    5) 웹팩 모드 3 가지 
+        - none
+        - development 
+        - production 
+
+        ex) 
+            webpack --mode=none
+            webpack --mode=development
+            webpack --mode=production
+
+
+
+
