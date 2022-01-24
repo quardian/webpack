@@ -31,7 +31,7 @@
         or 
         npm i --save-prod gulp
         or 
-        npm i glup 
+        npm i gulp 
     └───────────────────────────────────────────────┘
 
     2) gulp 라이브러리 삭제

@@ -1,0 +1,66 @@
+┌───────────────────────────────────────────────┐
+    웹팩(Webpack) 설정 - devtool
+└───────────────────────────────────────────────┘
+    
+    - 이 옵션은 소스맵이 어떻게 생성될지를 제어한다.
+
+    - 보다 세밀한 구성을 위해 SourceMapDevToolPlugin 을 사용하라.
+    - 이미 존재하는 소스 맵을 다루기 위해서는 source-map-loader 를 보라.
+
+
+    1. devtool
+        string = 'eval' false
+
+
+    2. SourceMapDevToolPlugin
+
+        ┌───────────────────────────────────────────────┐
+          new webpack.SourceMapDevToolPlugin(options);
+        └───────────────────────────────────────────────┘
+
+        - 다음 옵션들을 지원한다.
+
+            . test (string Regexp [string, RegExp] )    : 확장자 기반으로 모듈에 대한 소스맵을 포함 ( 기본 .js, .mjs, .css )
+            . include (string RegExp [string, RegExp])  : 지정된 값과 일치하는 모듈의 경로에 대한 소스맵 포함 
+            . exclude (string RegExp [string, RegExp])  : 지정된 값과 일치하는 모듈의 경로에 대한 소스맵 제외
+            . filename (string)                         : SourceMap의 생성 파일명 정의
+            . append (string)                           : 원래 asset에 제공된 값 추가. 일반적으로 #sourceMappingURL 코멘트
+            . moduleFilenameTemplate (string)           : See output.devtoolModuleFilenameTemplate.
+            . fallbackModuleFilenameTemplate (string)   : See link above.
+            . namespace (string)                        : See output.devtoolNamespace.
+            . module = true                             : 로더가 sourceMap을 생성해야할지를 가리킴.
+            . columns = true                            : 컬럼 매핑이 사용되는지를 가리킴.
+            . noSources = false                         : 소스 맵내에 포함된 원본으로 부터 소스파일 컨텐츠 보호할지 여부
+            . publicPath (string)                       : 공개 경로 접두사가 있는 절대 URL 
+            . fileContext (string)                      : 이 디렉토리와 관련된 [file] 인자를 만든다.
+            . sourceRoot (string)                       : SourceMap 내의 sourceRoot 속성에 대한 사용자 정의값 제공.
+
+        1) 기본 사용 사례
+
+            - devtool: inline-source-map 다음 코드를 사용하여 구성 옵션 을 동등한 사용자 정의 플러그인 구성 으로 바꿀 수 있습니다 .
+        ┌───────────────────────────────────────────────┐
+            module.exports = {
+                devtool: false,
+                plugins: [new webpack.SourceMapDevToolPlugin({})],
+            };
+        └───────────────────────────────────────────────┘            
+
+        2) Exclude Vendor Maps
+        
+            - 다음 코드는 vendor.js번들의 모든 모듈에 대한 소스 맵을 제외합니다.
+        ┌───────────────────────────────────────────────┐
+                new webpack.SourceMapDevToolPlugin({
+                    filename: '[name].js.map',
+                    exclude: ['vendor.js'],
+                });
+        └───────────────────────────────────────────────┘                
+
+        3) Host Source Maps Externally
+        
+            - 소스 맵의 URL을 설정합니다. 승인이 필요한 호스트에서 호스팅하는 데 유용합니다.
+        ┌───────────────────────────────────────────────┐
+            new webpack.SourceMapDevToolPlugin({
+                append: '\n//# sourceMappingURL=https://example.com/sourcemap/[url]',
+                filename: '[name].map',
+            });
+        └───────────────────────────────────────────────┘   
